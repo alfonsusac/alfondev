@@ -1,101 +1,119 @@
-import Image from "next/image";
-
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <div className="min-h-screen flex flex-col items-center px-3 font-sans pb-10"
+      style={{
+        // @ts-expect-error custom css variable
+        "--p-container": "0.75rem"
+      }}
+    >
+      <div className="w-full max-w-screen-sm min-h-screen"
+        style={{
+          // @ts-expect-error custom css variable
+          "--w-content": "640px"
+        }}
+      >
+        <header className="pt-28 tracking-tight">
+          <div className="text-3xl tracking-tighter">alfon</div>
+          <div className="font-light text-foreground2 font-mono flex gap-4">
+            <div>
+              alfonsus ardani - 
+            </div>
+            {
+              [
+                { url: "https://x.com/alfonsusac", description: "X" },
+                { url: "https://github.com/alfonsusac", description: "github" },
+                { url: "https://www.linkedin.com/in/alfonsusac/", description: "linkedin" },
+                { url: "https://bsky.app/profile/alfonsus.bsky.social", description: "bsky" },
+                { url: "https://discord.gg/c8MYbXtfvG", description: "discord" },
+              ].map((a, i) => {
+                return (
+                  <div key={i} className="">
+                    <a href={a.url} target="_blank" className="text-foreground2 hover:text-foreground">{a.description}</a>{' '}
+                  </div>
+                );
+              })
+            }
+          </div>
+        </header>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+        <section className="pt-3">
+          <div className="font-light text-foreground font-mono text-sm">I am a frontend developer that build tools and helps community that empower developers.</div>
+        </section>
+
+
+        <section className="pt-20">
+          <div className="font-mono text-lg tracking-tight text-foreground2 font-extralight pb-4">
+            Directories
+          </div>
+          {
+            [
+              { url: "react-flip-array.alfon.dev", description: "Array reorder animation using FLIP & Code animation" },
+              { url: "react-learn.alfon.dev", description: "Learn React via Animation" },
+              { url: "dishook.alfon.dev", description: "Discord webhook generator" },
+              { url: "advent-of-ui.vercel.app", description: "Advent of UI - 24 days of UI challenges" },
+              { url: "nu-auth.vercel.app", description: "Type-safe stateless Next.js Authentication" },
+              { url: "vtuberlogos.alfon.dev", description: "VTuber Logo Compilations" },
+              { url: "mermaid-ssr.vercel.app", description: "Server side render mermaid diagrams" },
+              { url: "github.com/alfonsusac/nextjs-better-unstable-cache", description: "Next.js cache function wrapper" },
+              { url: "cautious-palm-tree-ebon.vercel.app", description: "React drag and drop canvas control demo" },
+            ].map((a, i) => {
+              return (
+                <div key={i} className="-indent-4 pl-4">
+                  <a href={a.url} target="_blank" className="text-foreground3 hover:text-foreground">{a.url}</a>{' '}
+                  <span className="text-foreground2">{a.description}</span>
+                </div>
+              );
+            })
+          }
+        </section>
+
+        <section className="pt-20">
+          <div className="font-mono text-lg tracking-tight text-foreground2 font-extralight pb-4">
+            Articles
+          </div>
+          {
+            [
+              { title: "Git Concepts: Crash Course For Beginners", url: "https://alfonsusardani.notion.site/Git-Concepts-Crash-Course-For-Beginners-fa16256c65624048a115e2faa208cf31", description: "alfonsusardani.notion.site - 2024-03-11" },
+              { title: "Next.js Data Cache Behavior", url: "https://alfonsusardani.notion.site/Next-js-Data-Cache-Behavior-44f1a579c6d74f25bc55d301786e94ab", description: "alfonsusardani.notion.site - 2024-02-07" },
+            ].map((a, i) => {
+              return (
+                <div key={i} className="-indent-4 pl-4">
+                  <a href={a.url} target="_blank" className="text-foreground3 hover:text-foreground">{a.title}</a>{' '}
+                  <span className="text-foreground2">{a.description}</span>
+                </div>
+              );
+            })
+          }
+        </section>
+
+        <section className="pt-20">
+          <div className="font-mono text-lg tracking-tight text-foreground2 font-extralight pb-4">
+            Devscale
+          </div>
+          {
+            [
+              { url: "art-findr.vercel.app", description: "Demo app to find household assistants (Devscale final assignment)" },
+              { url: "devscale-eventmaker-alfonsusac.vercel.app", description: "Devscale 5th assignment" },
+              { url: "devscale-alfonsus-assignment-4.vercel.app", description: "Devscale 4th assignment" },
+              { url: "assignment-3-devscale.vercel.app/", description: "Devscale 3rd assignment" },
+            ].map((a, i) => {
+              return (
+                <div key={i} className="-indent-4 pl-4">
+                  <a href={a.url} target="_blank" className="text-foreground3 hover:text-foreground">{a.url}</a>{' '}
+                  <span className="text-foreground2">{a.description}</span>
+                </div>
+              );
+            })
+          }
+        </section>
+        <footer>
+          <div className="pt-20 text-center text-foreground2 pb-20">
+            <div className="text-sm">
+              © {new Date().getFullYear()} alfon
+            </div>
+          </div>
+        </footer>
+      </div>
     </div>
   );
 }

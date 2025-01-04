@@ -11,6 +11,12 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        foreground2: "var(--foreground2)",
+        foreground3: "var(--foreground3)",
+      },
+      fontFamily: {
+        sans: "var(--font-geist-sans)",
+        mono: "var(--font-geist-mono)",
       },
     },
   },
