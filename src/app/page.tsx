@@ -16,7 +16,7 @@ export default function Home() {
           <div className="text-3xl tracking-tighter">alfon</div>
           <div className="font-light text-foreground2 font-mono flex gap-4">
             <div>
-              alfonsus ardani - 
+              alfonsus ardani -
             </div>
             {
               [
@@ -53,9 +53,9 @@ export default function Home() {
               { url: "advent-of-ui.vercel.app", description: "Advent of UI - 24 days of UI challenges" },
               { url: "nu-auth.vercel.app", description: "Type-safe stateless Next.js Authentication" },
               { url: "vtuberlogos.alfon.dev", description: "VTuber Logo Compilations" },
-              { url: "mermaid-ssr.vercel.app", description: "Server side render mermaid diagrams" },
+              { url: "mermaid-ssr.alfon.dev", description: "Server side render mermaid diagrams" },
               { url: "github.com/alfonsusac/nextjs-better-unstable-cache", description: "Next.js cache function wrapper" },
-              { url: "cautious-palm-tree-ebon.vercel.app", description: "React drag and drop canvas control demo" },
+
             ].map((a, i) => {
               return (
                 <div key={i} className="-indent-4 pl-4">
@@ -92,6 +92,7 @@ export default function Home() {
           </div>
           {
             [
+              { url: "cautious-palm-tree-ebon.vercel.app", description: "React drag and drop canvas control demo" },
               { url: "art-findr.vercel.app", description: "Demo app to find household assistants (Devscale final assignment)" },
               { url: "devscale-eventmaker-alfonsusac.vercel.app", description: "Devscale 5th assignment" },
               { url: "devscale-alfonsus-assignment-4.vercel.app", description: "Devscale 4th assignment" },
