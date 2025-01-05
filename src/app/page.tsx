@@ -37,13 +37,13 @@ export default function Home() {
         </header>
 
         <section className="pt-3">
-          <div className="font-light text-foreground font-mono text-sm">I am a frontend developer that build tools and helps community that empower developers.</div>
+          <div className="font-light text-foreground font-mono text-sm">I am a frontend developer  and a designer that build tools and helps community that empower developers.</div>
         </section>
 
 
         <section className="pt-20">
-          <div className="font-mono text-lg tracking-tight text-foreground2 font-extralight pb-4">
-            Directories
+          <div className="font-mono text-lg tracking-tight text-foreground2 font-light pb-4">
+            directories
           </div>
           {
             [
@@ -68,8 +68,8 @@ export default function Home() {
         </section>
 
         <section className="pt-20">
-          <div className="font-mono text-lg tracking-tight text-foreground2 font-extralight pb-4">
-            Articles
+          <div className="font-mono text-lg tracking-tight text-foreground2 font-light pb-4">
+            articles
           </div>
           {
             [
@@ -87,8 +87,8 @@ export default function Home() {
         </section>
 
         <section className="pt-20">
-          <div className="font-mono text-lg tracking-tight text-foreground2 font-extralight pb-4">
-            Devscale
+          <div className="font-mono text-lg tracking-tight text-foreground2 font-light pb-4">
+            demo
           </div>
           {
             [
