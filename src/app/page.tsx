@@ -13,10 +13,13 @@ export default function Home() {
         }}
       >
         <header className="pt-28 tracking-tight">
-          <div className="text-3xl tracking-tighter">alfon</div>
-          <div className="font-light text-foreground2 font-mono flex gap-4">
-            <div>
-              alfonsus ardani -
+          <div className="text-4xl tracking-tighter">alfon</div>
+          <div className="font-light text-foreground2 font-mono flex gap-x-4 flex-wrap">
+            <div className="w-full sm:w-auto">
+              alfonsus ardani
+            </div>
+            <div className="hidden sm:block">
+              -
             </div>
             {
               [
@@ -36,12 +39,12 @@ export default function Home() {
           </div>
         </header>
 
-        <section className="pt-3">
-          <div className="font-light text-foreground font-mono text-sm">I am a frontend developer  and a designer that build tools and helps community that empower developers.</div>
+        <section className="pt-4">
+          <div className="text-foreground font-mono text-sm">i am a frontend developer  and a designer that build tools and helps community that empower developers.</div>
         </section>
 
 
-        <section className="pt-20">
+        <section className="pt-12">
           <div className="font-mono text-lg tracking-tight text-foreground2 font-light pb-4">
             directories
           </div>
@@ -58,7 +61,7 @@ export default function Home() {
 
             ].map((a, i) => {
               return (
-                <div key={i} className="-indent-4 pl-4">
+                <div key={i}>
                   <a href={a.url} target="_blank" className="text-foreground3 hover:text-foreground">{a.url}</a>{' '}
                   <span className="text-foreground2">{a.description}</span>
                 </div>
@@ -77,7 +80,7 @@ export default function Home() {
               { title: "Next.js Data Cache Behavior", url: "https://alfonsusardani.notion.site/Next-js-Data-Cache-Behavior-44f1a579c6d74f25bc55d301786e94ab", description: "alfonsusardani.notion.site - 2024-02-07" },
             ].map((a, i) => {
               return (
-                <div key={i} className="-indent-4 pl-4">
+                <div key={i}>
                   <a href={a.url} target="_blank" className="text-foreground3 hover:text-foreground">{a.title}</a>{' '}
                   <span className="text-foreground2">{a.description}</span>
                 </div>
@@ -99,7 +102,7 @@ export default function Home() {
               { url: "assignment-3-devscale.vercel.app/", description: "Devscale 3rd assignment" },
             ].map((a, i) => {
               return (
-                <div key={i} className="-indent-4 pl-4">
+                <div key={i}>
                   <a href={a.url} target="_blank" className="text-foreground3 hover:text-foreground">{a.url}</a>{' '}
                   <span className="text-foreground2">{a.description}</span>
                 </div>
