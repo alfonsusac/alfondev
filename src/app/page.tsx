@@ -50,19 +50,19 @@ export default function Home() {
           </div>
           {
             [
-              { url: "react-flip-array.alfon.dev", description: "Array reorder animation using FLIP & Code animation" },
-              { url: "react-learn.alfon.dev", description: "Learn React via Animation" },
-              { url: "dishook.alfon.dev", description: "Discord webhook generator" },
-              { url: "advent-of-ui.vercel.app", description: "Advent of UI - 24 days of UI challenges" },
-              { url: "nu-auth.vercel.app", description: "Type-safe stateless Next.js Authentication" },
-              { url: "vtuberlogos.alfon.dev", description: "VTuber Logo Compilations" },
-              { url: "mermaid-ssr.alfon.dev", description: "Server side render mermaid diagrams" },
-              { url: "github.com/alfonsusac/nextjs-better-unstable-cache", description: "Next.js cache function wrapper" },
+              { url: "https://react-flip-array.alfon.dev", description: "Array reorder animation using FLIP & Code animation" },
+              { url: "https://react-lava.alfon.dev", description: "Learn React via Animation" },
+              { url: "https://dishook.alfon.dev", description: "Discord webhook generator" },
+              { url: "https://advent-of-ui.vercel.app", description: "Advent of UI - 24 days of UI challenges" },
+              { url: "https://nu-auth.vercel.app", description: "Type-safe stateless Next.js Authentication" },
+              { url: "https://vtuberlogos.alfon.dev", description: "VTuber Logo Compilations" },
+              { url: "https://mermaid-ssr.alfon.dev", description: "Server side render mermaid diagrams" },
+              { url: "https://github.com/alfonsusac/nextjs-better-unstable-cache", description: "Next.js cache function wrapper" },
 
             ].map((a, i) => {
               return (
                 <div key={i}>
-                  <a href={a.url} target="_blank" className="text-foreground3 hover:text-foreground">{a.url}</a>{' '}
+                  <a href={a.url} target="_blank" className="text-foreground3 hover:text-foreground">{a.url.replace('https://', '')}</a>{' '}
                   <span className="text-foreground2">{a.description}</span>
                 </div>
               );
@@ -95,15 +95,15 @@ export default function Home() {
           </div>
           {
             [
-              { url: "cautious-palm-tree-ebon.vercel.app", description: "React drag and drop canvas control demo" },
-              { url: "art-findr.vercel.app", description: "Demo app to find household assistants (Devscale final assignment)" },
-              { url: "devscale-eventmaker-alfonsusac.vercel.app", description: "Devscale 5th assignment" },
-              { url: "devscale-alfonsus-assignment-4.vercel.app", description: "Devscale 4th assignment" },
-              { url: "assignment-3-devscale.vercel.app/", description: "Devscale 3rd assignment" },
+              { url: "https://cautious-palm-tree-ebon.vercel.app", description: "React drag and drop canvas control demo" },
+              { url: "https://art-findr.vercel.app", description: "Demo app to find household assistants (Devscale final assignment)" },
+              { url: "https://devscale-eventmaker-alfonsusac.vercel.app", description: "Devscale 5th assignment" },
+              { url: "https://devscale-alfonsus-assignment-4.vercel.app", description: "Devscale 4th assignment" },
+              { url: "https://assignment-3-devscale.vercel.app/", description: "Devscale 3rd assignment" },
             ].map((a, i) => {
               return (
                 <div key={i}>
-                  <a href={a.url} target="_blank" className="text-foreground3 hover:text-foreground">{a.url}</a>{' '}
+                  <a href={a.url} target="_blank" className="text-foreground3 hover:text-foreground">{a.url.replace('https://', '')}</a>{' '}
                   <span className="text-foreground2">{a.description}</span>
                 </div>
               );
