@@ -123,7 +123,7 @@ export default function Home() {
         </footer>
       </div>
       <Script id="analytics" crossOrigin="anonymous">
-        {`try { fetch('https://alfon.dev/api/analytics', {
+        {`try { fetch('https://alfon.dev/api/public/analytics', {
     method: 'POST',
     headers: { 
     'Content-Type': 'application/json'
