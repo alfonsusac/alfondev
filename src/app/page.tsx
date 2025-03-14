@@ -1,6 +1,7 @@
 import Script from "next/script";
 
 export default function Home() {
+
   return (
     <div className="min-h-screen flex flex-col items-center px-3 font-sans pb-10"
       style={{
@@ -121,12 +122,14 @@ export default function Home() {
           </div>
         </footer>
       </div>
-      <Script id="analytics">
-        {`try { fetch('/api/analytics', {
+      <Script id="analytics" crossOrigin="anonymous">
+        {`try { fetch('https://alfon.dev/api/analytics', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 
+    'Content-Type': 'application/json'
+     },
     body: JSON.stringify({
-      a: 'alfon.dev',
+      p: 'alfon.dev',
       e: 'visit',
       m: { referer: document.referrer || 'direct' }
     })
