@@ -39,7 +39,7 @@ export async function POST(r: NextRequest) {
   })
 
 
-  // // Umami
+  // // // Umami
   // const ures = await fetch('https://analytics.arinji.com/api/send', {
   //   method: 'POST',
   //   headers: {
@@ -50,28 +50,19 @@ export async function POST(r: NextRequest) {
   //   body: JSON.stringify({
   //     type: 'event',
   //     payload: {
-  //       // // hostname: '',
-  //       // // language: 'en-US',
-  //       // // referer,
-  //       // // screen: '1920x1080',
-  //       // // title: project,
-  //       // // url: '',
-  //       // "hostname": "your-hostname",
-  //       // "language": "en-US",
-  //       // "referrer": "",
-  //       // "screen": "1920x1080",
-  //       // "title": "dashboard",
-  //       // "url": "/",
-  //       website: process.env.UMAMI_WEBSITE_ID,
-  //       // "name": "event-name",
-  //       // "data": {
-  //       //   "foo": "bar"
-  //       // }
-  //       // name: event,
-  //       // data: {
-  //       //   location,
-  //       //   meta,
-  //       // }
+  //       "payload": {
+  //         "hostname": "",
+  //         "language": "",
+  //         "referrer": "",
+  //         "screen": "",
+  //         "title": "dashboard",
+  //         "url": "/",
+  //         "website": "d22e04da-dabc-40da-9ced-ddc457aa3ab9",
+  //         "name": "event-name",
+  //         "data": {
+  //           "foo": "bar"
+  //         }
+  //       },
   //     }
   //   })
   // })
@@ -80,7 +71,7 @@ export async function POST(r: NextRequest) {
   // console.log("Logged to Umami")
 
   after(async () => {
-    const pres = await prisma.thing.upsert({
+    await prisma.thing.upsert({
       where: {
         id: project,
         referer,
