@@ -14,11 +14,14 @@ datasource db {
 }
 
 model Thing {
-  id         String      @id
-  count      Int
+  id         Int      @id @default(autoincrement())
+  count      Int      
+  project    String   
   event      String
   location   String
   referer    String
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
+
+  @@unique([project, event, location, referer])
 }

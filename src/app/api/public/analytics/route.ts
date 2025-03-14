@@ -73,13 +73,15 @@ export async function POST(r: NextRequest) {
   after(async () => {
     await prisma.thing.upsert({
       where: {
-        id: project,
-        referer,
-        location,
-        event,
+        project_event_location_referer: {
+          referer,
+          location,
+          event,
+          project,
+        }
       },
       create: {
-        id: project,
+        project,
         referer,
         location,
         event,
