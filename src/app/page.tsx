@@ -49,6 +49,28 @@ export default function Home() {
 
         <section className="pt-12">
           <div className="font-mono text-lg tracking-tight text-foreground2 font-light pb-4">
+            packages
+          </div>
+          {
+            [
+              ['check-site-meta', 'https://www.npmjs.com/package/check-site-meta', 'Check site metadata locally via npx before deployment'],
+              ['react-flip-children', 'https://www.npmjs.com/package/react-flip-children', 'FLIP animation for React components'],
+              ['advent-event', 'https://www.npmjs.com/package/advent-event', 'Simple TS library to create advent events'],
+              ['mermaid-ssr', 'https://mermaid-ssr.alfon.dev', 'Server side render mermaid diagrams via http (fetch-only)'],
+              ['nextjs-better-unstable-cache', 'https://www.npmjs.com/package/nextjs-better-unstable-cache', 'Next.js cache function wrapper with better logging and options'],
+            ].map((a, i) => {
+              return (
+                <div key={i}>
+                  <a href={a[1]} target="_blank" className="text-foreground3 hover:text-foreground">{a[0]}</a>{' '}
+                  <span className="text-foreground2">{a[2]}</span>
+                </div>
+              );
+            })
+          }
+        </section>
+        
+        <section className="pt-12">
+          <div className="font-mono text-lg tracking-tight text-foreground2 font-light pb-4">
             directories
           </div>
           {
@@ -61,7 +83,6 @@ export default function Home() {
               { url: "https://nu-auth.vercel.app", description: "Type-safe stateless Next.js Authentication" },
               { url: "https://vtuberlogos.alfon.dev", description: "VTuber Logo Compilations" },
               { url: "https://mermaid-ssr.alfon.dev", description: "Server side render mermaid diagrams" },
-              { url: "https://github.com/alfonsusac/nextjs-better-unstable-cache", description: "Next.js cache function wrapper" },
 
             ].map((a, i) => {
               return (
