@@ -1,17 +1,16 @@
 import Script from "next/script";
+import type { CSSProperties } from "react"
 
 export default function Home() {
 
   return (
     <div className="min-h-screen flex flex-col items-center px-3 font-sans pb-10"
       style={{
-        // @ts-expect-error custom css variable
         "--p-container": "0.75rem"
       }}
     >
       <div className="w-full max-w-screen-sm min-h-screen"
         style={{
-          // @ts-expect-error custom css variable
           "--w-content": "640px"
         }}
       >
