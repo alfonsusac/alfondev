@@ -24,17 +24,21 @@ export async function POST(r: NextRequest) {
 
   after(async () => {
     // Axiom
-    await fetch(`https://api.axiom.co/v1/datasets/${ dataset_name }/ingest`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${ process.env.AXIOM_API_KEY }`
-      },
-      body: JSON.stringify([{
-        level: 'info',
-        ...data,
-      }])
-    })
+    try {
+      await fetch(`https://api.axiom.co/v1/datasets/${ dataset_name }/ingest`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${ process.env.AXIOM_API_KEY }`
+        },
+        body: JSON.stringify([{
+          level: 'info',
+          ...data,
+        }])
+      })
+    } catch (error) {
+      console.log(error)
+    }
     // console.log("Logged to Axiom")
   })
 
@@ -71,26 +75,30 @@ export async function POST(r: NextRequest) {
   // console.log("Logged to Umami")
 
   after(async () => {
-    await prisma.thing.upsert({
-      where: {
-        project_event_location_referer: {
+    try {
+      await prisma.thing.upsert({
+        where: {
+          project_event_location_referer: {
+            referer,
+            location,
+            event,
+            project,
+          }
+        },
+        create: {
+          project,
           referer,
           location,
           event,
-          project,
+          count: 1,
+        },
+        update: {
+          count: { increment: 1 }
         }
-      },
-      create: {
-        project,
-        referer,
-        location,
-        event,
-        count: 1,
-      },
-      update: {
-        count: { increment: 1 }
-      }
-    })
+      })
+    } catch (error) {
+      console.log(error)
+    } 
     // console.log(pres)
     // console.log("Logged to DB")
   })

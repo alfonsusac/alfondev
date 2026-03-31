@@ -25,7 +25,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <script id="umami-script" defer src="https://analytics.arinji.com/script.js" data-website-id="d22e04da-dabc-40da-9ced-ddc457aa3ab9"></script>
+        {/* <script id="umami-script" defer src="https://analytics.arinji.com/script.js" data-website-id="d22e04da-dabc-40da-9ced-ddc457aa3ab9"></script> */}
       </head>
       <body
         className={`${ geistSans.variable } ${ geistMono.variable } antialiased`}

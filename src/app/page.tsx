@@ -117,7 +117,9 @@ export default function Home() {
           </div>
         </footer>
       </div>
-      <Script id="analytics" crossOrigin="anonymous">
+      <Script
+        id="analytics" crossOrigin="anonymous" defer
+      >
         {`try { fetch('${ process.env.NODE_ENV === 'production' ? `https://alfon.dev` : '' }/api/public/analytics', {
     method: 'POST',
     headers: { 
@@ -128,7 +130,12 @@ export default function Home() {
       e: 'visit',
       m: { referer: document.referrer || 'direct' }
     })
-        }) } catch {}`}
+        })
+          console.log("analytics sent!")
+        } catch (error) {
+        console.log(error)  
+        }
+          `}
       </Script>
     </div>
   )
