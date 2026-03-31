@@ -1,73 +1,48 @@
-import Script from "next/script";
-import type { CSSProperties } from "react"
+import { data } from "@/content"
+import Script from "next/script"
 
 export default function Home() {
 
   return (
-    <div className="min-h-screen flex flex-col items-center px-3 font-sans pb-10"
-      style={{
-        "--p-container": "0.75rem"
-      }}
-    >
-      <div className="w-full max-w-screen-sm min-h-screen"
-        style={{
-          "--w-content": "640px"
-        }}
-      >
+    <div className="min-h-screen flex flex-col items-center px-3 font-sans pb-10">
+      <div className="w-full max-w-screen-sm min-h-screen">
         <header className="pt-28 tracking-tight">
-          <div className="text-4xl tracking-tighter">alfon</div>
-          <div className="font-light text-foreground2 font-mono flex gap-x-4 flex-wrap">
-            <div className="w-full sm:w-auto">
-              alfonsus ardani
-            </div>
+          <div className="text-4xl tracking-tighter font-medium">{data.title}</div>
+          <div className="font-light text-foreground2 tracking-normal flex gap-x-4 flex-wrap">
+            <div className="w-full sm:w-auto capitalize">{data.fullName}</div>
             <div className="hidden sm:block">
               -
             </div>
-            {
-              [
-                { url: "https://x.com/alfonsusac", description: "X" },
-                { url: "https://github.com/alfonsusac", description: "github" },
-                { url: "https://www.linkedin.com/in/alfonsusac/", description: "linkedin" },
-                { url: "https://bsky.app/profile/alfonsus.bsky.social", description: "bsky" },
-                { url: "https://discord.gg/c8MYbXtfvG", description: "discord" },
-              ].map((a, i) => {
-                return (
-                  <div key={i} className="">
-                    <a href={a.url} target="_blank" className="text-foreground2 hover:text-foreground">{a.description}</a>{' '}
-                  </div>
-                );
-              })
-            }
+            {data.socials.map((a, i) => {
+              return (
+                <div key={i} className="">
+                  <a href={a.url} target="_blank" className="text-foreground2 hover:text-foreground">{a.description}</a>{' '}
+                </div>
+              )
+            })}
           </div>
         </header>
-
-        <section className="pt-4">
-          <div className="text-foreground font-mono text-sm">i am a frontend developer  and a designer that build tools and helps community that empower developers.</div>
-        </section>
-
 
         <section className="pt-12">
           <div className="font-mono text-lg tracking-tight text-foreground2 font-light pb-4">
             packages
           </div>
-          {
-            [
-              ['check-site-meta', 'https://www.npmjs.com/package/check-site-meta', 'Check site metadata locally via npx before deployment'],
-              ['react-flip-children', 'https://www.npmjs.com/package/react-flip-children', 'FLIP animation for React components'],
-              ['advent-event', 'https://www.npmjs.com/package/advent-event', 'Simple TS library to create advent events'],
-              ['mermaid-ssr', 'https://mermaid-ssr.alfon.dev', 'Server side render mermaid diagrams via http (fetch-only)'],
-              ['nextjs-better-unstable-cache', 'https://www.npmjs.com/package/nextjs-better-unstable-cache', 'Next.js cache function wrapper with better logging and options'],
-            ].map((a, i) => {
-              return (
-                <div key={i}>
-                  <a href={a[1]} target="_blank" className="text-foreground3 hover:text-foreground">{a[0]}</a>{' '}
-                  <span className="text-foreground2">{a[2]}</span>
-                </div>
-              );
-            })
-          }
+          <div className="flex flex-col gap-2">
+            {
+              data.projects.map((p, i) => {
+                return (
+                  <div key={i} className="flex flex-col">
+                    <div className="text-foreground3 hover:text-foreground">
+                      {p.name}
+                    </div>
+                    <div className="text-foreground2 text-xs">{p.description}</div>
+                  </div>
+                )
+              })
+            }
+          </div>
         </section>
-        
+
         <section className="pt-12">
           <div className="font-mono text-lg tracking-tight text-foreground2 font-light pb-4">
             directories
@@ -89,7 +64,7 @@ export default function Home() {
                   <a href={a.url} target="_blank" className="text-foreground3 hover:text-foreground">{a.url.replace('https://', '')}</a>{' '}
                   <span className="text-foreground2">{a.description}</span>
                 </div>
-              );
+              )
             })
           }
         </section>
@@ -108,7 +83,7 @@ export default function Home() {
                   <a href={a.url} target="_blank" className="text-foreground3 hover:text-foreground">{a.title}</a>{' '}
                   <span className="text-foreground2">{a.description}</span>
                 </div>
-              );
+              )
             })
           }
         </section>
@@ -130,7 +105,7 @@ export default function Home() {
                   <a href={a.url} target="_blank" className="text-foreground3 hover:text-foreground">{a.url.replace('https://', '')}</a>{' '}
                   <span className="text-foreground2">{a.description}</span>
                 </div>
-              );
+              )
             })
           }
         </section>
@@ -143,7 +118,7 @@ export default function Home() {
         </footer>
       </div>
       <Script id="analytics" crossOrigin="anonymous">
-        {`try { fetch('${ process.env.NODE_ENV === 'production' ? `https://alfon.dev` : ''}/api/public/analytics', {
+        {`try { fetch('${ process.env.NODE_ENV === 'production' ? `https://alfon.dev` : '' }/api/public/analytics', {
     method: 'POST',
     headers: { 
     'Content-Type': 'application/json'
@@ -156,6 +131,6 @@ export default function Home() {
         }) } catch {}`}
       </Script>
     </div>
-  );
+  )
 }
 
