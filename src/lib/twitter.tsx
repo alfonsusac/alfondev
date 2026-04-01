@@ -15,7 +15,7 @@ import {
   type MediaVideo,
   type TweetUser,
 } from "react-tweet/api"
-import { cn } from "./ui"
+import { cn, IconamoonCommentFill, TablerExternalLink } from "./ui"
 import { Fragment, type ComponentProps, type ReactNode } from "react"
 
 
@@ -64,7 +64,6 @@ export async function AppTweet(props: {
       ) : null}
       {/* {tweet.quoted_tweet && <QuotedTweet tweet={tweet.quoted_tweet} />} */}
       <TweetActions tweet={tweet} />
-      {/* <TweetReplies tweet={tweet} /> */}
     </TweetContainer>
   )
 }
@@ -247,6 +246,7 @@ function TweetInReplyTo(props: { tweet: EnrichedTweet }) {
 
 function TweetBody(props: { tweet: EnrichedTweet }) {
   return <p className={cn(
+    "my-3 mb-5 leading-snug",
     "s.root",
     "wrap-break-word",
     "whitespace-pre-wrap",
@@ -355,9 +355,12 @@ function TweetMediaVideo({ tweet, media }: {
   const mp4Video = getMp4Video(media)
   let timeout = 0
 
+  console.log(mp4Video)
+
   return (
     <>
       <video
+        controls={true}
         // className={mediaStyles.image}
         poster={getMediaUrl(media, 'small')}
         // controls={!playButton}
@@ -382,7 +385,7 @@ function TweetMediaVideo({ tweet, media }: {
       //   setEnded(true)
       // }}
       >
-        <source src={mp4Video.url} type={mp4Video.content_type} />
+        <source src={mp4Video.url.replace('?tag=12', '')} type={mp4Video.content_type} />
       </video>
 
       {/* {playButton && (
@@ -451,52 +454,24 @@ function TweetMediaVideo({ tweet, media }: {
 //   return <></>
 // }
 function TweetInfo(props: { tweet: EnrichedTweet }) {
-  return (
-    <div
-      className={cn(
-        "text-foreground3"
-      )}
-    >
-      <TweetInfoCreatedAt tweet={props.tweet} /> from X:
-      {/* <a
-        // className={s.infoLink}
-        className="flex justfiy-center items-center"
-        href="https://help.x.com/en/x-for-websites-ads-info-and-privacy"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Twitter for Websites, Ads Information and Privacy"
-      >
-        <svg viewBox="0 0 24 24" aria-hidden="true"
-          className={cn(
-            "text-inherit fill-current",
-            "h-4 select-none",
-          )}
-        >
-          <g>
-            <path d="M13.5 8.5c0 .83-.67 1.5-1.5 1.5s-1.5-.67-1.5-1.5S11.17 7 12 7s1.5.67 1.5 1.5zM13 17v-5h-2v5h2zm-1 5.25c5.66 0 10.25-4.59 10.25-10.25S17.66 1.75 12 1.75 1.75 6.34 1.75 12 6.34 22.25 12 22.25zM20.25 12c0 4.56-3.69 8.25-8.25 8.25S3.75 16.56 3.75 12 7.44 3.75 12 3.75s8.25 3.69 8.25 8.25z"></path>
-          </g>
-        </svg>
-      </a> */}
-    </div>
-  )
-}
-export function TweetInfoCreatedAt({ tweet }: { tweet: EnrichedTweet }) {
-  const createdAt = new Date(tweet.created_at)
+  const createdAt = new Date(props.tweet.created_at)
   const formattedCreatedAtDate = formatDate(createdAt)
 
   return (
-    <a
-      // className={s.root}
-
-      href={tweet.url}
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label={formattedCreatedAtDate}
-    >
-      <time dateTime={createdAt.toISOString()}>{formattedCreatedAtDate}</time>
-    </a>
+    <div className={cn("text-foreground3")}>
+      <a
+        href={props.tweet.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={formattedCreatedAtDate}
+      >
+        <time dateTime={createdAt.toISOString()}>{formattedCreatedAtDate}</time>
+      </a>{' '}
+      from X:
+    </div>
   )
 }
+
 function TweetActions(props: { tweet: EnrichedTweet }) {
   const favoriteCount = formatNumber(props.tweet.favorite_count)
   const replyCount = formatNumber(props.tweet.conversation_count)
@@ -505,21 +480,57 @@ function TweetActions(props: { tweet: EnrichedTweet }) {
     <div
       className={cn(
         "s.actions",
-        "flex items-center",
-        "text-foreground2",
+        "flex items-center justify-end",
+        "text-foreground4",
         // "text-(--tweet-font-color-secondary)",
-        "pt-1 mt-1 border-t-(--tweet-border)",
+        "pt-1 border-t-(--tweet-border)",
         "wrap-break-word",
         "whitespace-nowrap",
-        "text-ellipsis"
+        "text-ellipsis",
+
       )}
     >
       <a
         className={cn(
-          "s.like",
+          "s.reply",
+          "p-1 px-3 pr-4 rounded-xl hover:bg-foreground4/25",
           "no-underline text-inherit",
-          "flex items-center mr-5",
-          "hover:bg-[rgba(0,_0,_0,_0)]",
+          "flex items-center",
+          "group",
+        )}
+        href={props.tweet.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Reply to this Tweet on Twitter"
+      >
+        <div
+          className={cn(
+            "w-8 h-8 rounded-full -ml-1",
+            "flex items-center justify-center",
+          )}
+        >
+          <TablerExternalLink
+            className={cn(
+              "h-4.5 fill-current select-none",
+              "group-hover:text-foreground",
+            )}
+            aria-hidden="true"
+          />
+        </div>
+        <span
+          className={cn(
+            "s.replyText",
+            "text-sm font-medium leading-snug ml-1",
+            "group-hover:text-foreground",
+          )}
+        >Open</span>
+      </a>
+      <a
+        className={cn(
+          "s.like",
+          "p-1 px-3 pr-4 rounded-xl hover:bg-foreground4/25",
+          "no-underline text-inherit",
+          "flex items-center mr-1",
           "group",
         )}
         href={props.tweet.like_url}
@@ -538,7 +549,7 @@ function TweetActions(props: { tweet: EnrichedTweet }) {
             className={cn(
               "s.likeIcon",
               "h-4.5 fill-current select-none",
-              "text-red-500",
+              "group-hover:text-red-400",
             )}
             aria-hidden="true">
             <g>
@@ -551,16 +562,15 @@ function TweetActions(props: { tweet: EnrichedTweet }) {
             "s.likeCount",
             "text-sm font-medium leading-snug ml-1",
             "group-hover:text-red-400",
-            "group-hover:underline",
           )}
         >{favoriteCount}</span>
       </a>
       <a
         className={cn(
           "s.reply",
+          "p-1 px-3 pr-4 rounded-xl hover:bg-foreground4/25",
           "no-underline text-inherit",
-          "flex items-center mr-5",
-          "hover:bg-[rgba(0,_0,_0,_0)]",
+          "flex items-center",
           "group",
         )}
         href={props.tweet.reply_url}
@@ -575,24 +585,20 @@ function TweetActions(props: { tweet: EnrichedTweet }) {
             "flex items-center justify-center",
           )}
         >
-          <svg viewBox="0 0 24 24"
+          <IconamoonCommentFill
             className={cn(
               "s.replyIcon",
               "h-4.5 fill-current select-none",
-              "text-blue-500",
+              "group-hover:text-blue-500",
             )}
-            aria-hidden="true">
-            <g>
-              <path d="M1.751 10c0-4.42 3.584-8 8.005-8h4.366c4.49 0 8.129 3.64 8.129 8.13 0 2.96-1.607 5.68-4.196 7.11l-8.054 4.46v-3.69h-.067c-4.49.1-8.183-3.51-8.183-8.01z"></path>
-            </g>
-          </svg>
+            aria-hidden="true"
+          />
         </div>
         <span
           className={cn(
             "s.replyText",
             "text-sm font-medium leading-snug ml-1",
             "group-hover:text-blue-400",
-            "group-hover:underline",
           )}
         >{replyCount}</span>
       </a>
