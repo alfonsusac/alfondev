@@ -22,7 +22,7 @@ export async function POST(r: NextRequest) {
 
   const dataset_name = "main-app-dataset";
 
-  after(async () => {
+  (async () => {
     // Axiom
     try {
       await fetch(`https://api.axiom.co/v1/datasets/${ dataset_name }/ingest`, {
@@ -31,16 +31,16 @@ export async function POST(r: NextRequest) {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${ process.env.AXIOM_API_KEY }`
         },
-        body: JSON.stringify([{
+        body: JSON.stringify([ {
           level: 'info',
           ...data,
-        }])
+        } ])
       })
     } catch (error) {
       console.log(error)
     }
     // console.log("Logged to Axiom")
-  })
+  })();
 
 
   // // // Umami
@@ -74,7 +74,7 @@ export async function POST(r: NextRequest) {
   // console.log(await ures.text())
   // console.log("Logged to Umami")
 
-  after(async () => {
+  (async () => {
     try {
       await prisma.thing.upsert({
         where: {
@@ -98,10 +98,8 @@ export async function POST(r: NextRequest) {
       })
     } catch (error) {
       console.log(error)
-    } 
-    // console.log(pres)
-    // console.log("Logged to DB")
-  })
+    }
+  })();
 
 
   return new Response(null, {
