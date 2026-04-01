@@ -1,8 +1,11 @@
 import type { data } from "./content"
 
-export function project(
-  type: "tool" | "app" | "ui" | "lib" | "edu",
-  name: string,
+export function project<
+  T extends "tool" | "app" | "ui" | "lib" | "edu",
+  N extends string
+>(
+  type: T,
+  name: N,
   opts: {
     description: string,
     url: {
@@ -33,3 +36,14 @@ export function art() {
 }
 
 export type Socials = typeof data[ 'socials' ][ number ][ 'type' ]
+export type Projects = typeof data[ 'projects' ][ number ][ 'name' ]
+
+export function feedpost(
+  platform: "twitter" | "bsky",
+  url: string,
+  project?: Projects
+) {
+  if (!url.startsWith("https://x.com/"))
+    throw new Error("Invalid Twitter Link")
+  return { platform, url, project }
+}

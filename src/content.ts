@@ -67,7 +67,7 @@ export const data = {
     project("app", "Dishook", {
       description: "Discord webhook generator",
       url: {
-        github: "alfonsusac/dishook",
+        github: "alfonsusac/discord-webhook",
         site: "https://dishook.alfon.dev/",
       },
       timeFrame: { start: new Date('Dec 5, 2024'), end: new Date('Dec 18, 2024'), },
@@ -86,7 +86,7 @@ export const data = {
     project("app", "VTuber Logo Collections", {
       description: "A collection of service logos with the VTuber style.",
       url: {
-        github: "alfonsusac/vtuberlogos",
+        github: "alfonsusac/service-title-logo",
         site: "https://vtuberlogos.alfon.dev/",
       },
       timeFrame: { start: new Date('Apr 23, 2024'), end: new Date('May 27, 2024'), },

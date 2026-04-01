@@ -1,30 +1,16 @@
 import { data } from "@/content"
-import { LinkButton, MaterialSymbolsGlobe, MaterialSymbolsHideImage, MaterialSymbolsPackage2, MdiGithub, PageHeader, PageInner, PageOuter } from "@/lib/ui"
-import Link from "next/link"
+import { LinkButton, MaterialSymbolsGlobe, MaterialSymbolsHideImage, MaterialSymbolsPackage2, MaterialSymbolsStarRateRounded, MdiGithub, PageHeader, PageInner, PageOuter, SiteHeader } from "@/lib/ui"
+import { Suspense } from "react"
 
 export default async function ProjectPage(props: {
   params: Promise<{ project_id: string }>
 }) {
   const { project_id } = await props.params
 
-  const header = <header className="h-18 self-stretch -mx-10 px-10 flex items-center justify-center">
-    <div className="w-full max-w-3xl flex items-center justify-between">
-      <div className="flex gap-8 items-center">
-        <div className="text-2xl tracking-tight">alfon</div>
-        <div className="flex gap-2">
-          <LinkButton href="/" className="text-sm text-foreground3 hover:brightness-125">home</LinkButton>
-        </div>
-      </div>
-      <div>
-
-      </div>
-    </div>
-  </header>
-
   const project = data.projects.find(p => p.name.replaceAll(' ', '-') === project_id)
   if (!project) return (
     <PageOuter>
-      {header}
+      <SiteHeader />
       <PageInner>
         <PageHeader className="gap-4">
           <div className="flex flex-col gap-2">
@@ -39,43 +25,43 @@ export default async function ProjectPage(props: {
 
   return (
     <PageOuter>
-      {header}
-      <PageInner className="flex flex-col gap-8">
+      <SiteHeader />
+      <PageInner className="flex flex-col gap-6">
         <PageHeader className="gap-2">
           <div className="text-foreground4">/project</div>
           <h1 className="text-4xl font-semibold tracking-tight">{project.name}</h1>
           <div className="text-foreground2 max-w-120 leading-snug">{project.description}</div>
-          <section className='flex flex-col gap-2 pt-2'>
-            <div className="flex flex-col gap-1">
-              {project.url.github &&
-                <div className="text-foreground3 max-w-120 flex gap-2 items-center">
-                  <MdiGithub className="w-5 h-5" />
-                  <a target="_blank" href={`https://github.com/${ project.url.github }`} className="hover:brightness-150">
-                    {project.url.github}
-                  </a>
-                </div>
-              }
-              {project.url.site &&
-                <div className="text-foreground3 max-w-120 flex gap-2 items-center">
-                  <MaterialSymbolsGlobe className="w-5 h-5" />
-                  <a target="_blank" href={project.url.site} className="hover:brightness-150">
-                    {new URL(project.url.site).host}
-                  </a>
-                </div>
-              }
-              {project.url.package &&
-                <div className="text-foreground3 max-w-120 flex gap-2 items-center">
-                  <MaterialSymbolsPackage2 className="w-5 h-5" />
-                  <a target="_blank" href={`https://npmx.dev/${ project.url.package }`} className="hover:brightness-150">
-                    {project.url.package}
-                  </a>
-                </div>
-              }
-            </div>
-          </section>
         </PageHeader>
+        <section className='flex flex-col gap-2'>
+          <div className="flex flex-col gap-1">
+            {project.url.github &&
+              <div className="text-foreground3 max-w-120 flex gap-2 items-center">
+                <MdiGithub className="w-5 h-5" />
+                <a target="_blank" href={`https://github.com/${ project.url.github }`} className="hover:brightness-150">
+                  {project.url.github}
+                </a>
+              </div>
+            }
+            {project.url.site &&
+              <div className="text-foreground3 max-w-120 flex gap-2 items-center">
+                <MaterialSymbolsGlobe className="w-5 h-5" />
+                <a target="_blank" href={project.url.site} className="hover:brightness-150">
+                  {new URL(project.url.site).host}
+                </a>
+              </div>
+            }
+            {project.url.package &&
+              <div className="text-foreground3 max-w-120 flex gap-2 items-center">
+                <MaterialSymbolsPackage2 className="w-5 h-5" />
+                <a target="_blank" href={`https://npmx.dev/${ project.url.package }`} className="hover:brightness-150">
+                  {project.url.package}
+                </a>
+              </div>
+            }
+          </div>
+        </section>
         {project.thumbnail &&
-          <section>
+          <section className="my-2">
             <div className="aspect-[1200/630] bg-foreground4/5 rounded-xl outline-8 outline-foreground4/10 relative overflow-hidden flex items-center justify-center">
               <img
                 width="1200"
@@ -87,11 +73,47 @@ export default async function ProjectPage(props: {
                 <MaterialSymbolsHideImage />
                 Image Failed to Load
               </div>
-              {/* <div className="absolute rounded-xl inset-0 shadow-[inset_-0.05rem_0.05rem_0.2rem_#fff5,_inset_0.05rem_-0.05rem_0.2rem_#000]" /> */}
             </div>
           </section>
         }
+        <section className="flex gap-2">
+          {project.url.github &&
+            <div className="p-2 px-5 rounded-xl flex items-center gap-1 bg-foreground4/5 text-sm font-semibold">
+              <MaterialSymbolsStarRateRounded className="-ml-1 w-5 h-5" />
+              Stars
+              <div className="text-xs font-semibold rounded-full bg-foreground4/25 min-w-6 h-6 px-2 flex items-center justify-center">
+                <Suspense fallback="...">
+                  <GHStars repo_id={project.url.github} errorFallback="?" />
+                </Suspense>
+              </div>
+            </div>
+          }
+        </section>
       </PageInner>
     </PageOuter>
   )
 }
+
+async function GHStars(props: {
+  repo_id: string,
+  errorFallback?: string,
+}) {
+  try {
+    const repo = await (await fetch(`https://api.github.com/repos/${ props.repo_id }`, {
+      next: {
+        revalidate: 60
+      }
+    })).json() as unknown
+    if (typeof repo === "object"
+      && repo !== null
+      && "stargazers_count" in repo
+      && typeof repo.stargazers_count === "number"
+    ) {
+      return repo.stargazers_count
+    }
+    return props.errorFallback
+  } catch (error) {
+    return props.errorFallback
+  }
+}
+
