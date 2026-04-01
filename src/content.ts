@@ -1,3 +1,5 @@
+import { article, directory, project } from "./content-utils"
+
 export const data = {
   title: "alfon",
   fullName: "alfonsus ardani",
@@ -17,7 +19,9 @@ export const data = {
         github: "alfonsusac/diffy",
         site: "https://diffy.alfon.dev/",
       },
-      timeFrame: { start: new Date('Mar 21, 2026') }
+      timeFrame: { start: new Date('Mar 21, 2026') },
+      icon: "https://diffy.alfon.dev/icon.png",
+      thumbnail: "https://diffy.alfon.dev/opengraph-image.png",
     }),
     project("tool", "check-site-meta", {
       description: "Check site metadata locally via npx before deployment",
@@ -27,6 +31,8 @@ export const data = {
         site: "https://checksitemeta.alfon.dev/",
       },
       timeFrame: { start: new Date('Mar 9, 2025'), end: new Date('Jun 7, 2025') },
+      icon: "https://checksitemeta.alfon.dev/icon.png",
+      thumbnail: undefined
     }),
     project("ui", "react-flip-children", {
       description: "FLIP animation for React components",
@@ -35,7 +41,9 @@ export const data = {
         github: "alfonsusac/react-flip-children",
         site: "https://react-flip-children.alfon.dev/",
       },
-      timeFrame: { start: new Date('Dec 21, 2024'), end: new Date('Feb 19, 2025'), }
+      timeFrame: { start: new Date('Dec 21, 2024'), end: new Date('Feb 19, 2025'), },
+      icon: "https://react-flip-children.alfon.dev/icon.png",
+      thumbnail: "https://react-flip-children.alfon.dev/opengraph-image.png",
     }),
     project("lib", "advent-event", {
       description: "Simple TS library to create advent events",
@@ -44,7 +52,8 @@ export const data = {
         github: "alfonsusac/advent-event",
         site: "https://advent-event.alfon.dev/",
       },
-      timeFrame: { start: new Date('Jan 6, 2025'), end: new Date('Jan 7, 2025'), }
+      timeFrame: { start: new Date('Jan 6, 2025'), end: new Date('Jan 7, 2025'), },
+      thumbnail: undefined,
     }),
     project("edu", "react-lava", {
       description: "Learn React via Animation",
@@ -52,7 +61,8 @@ export const data = {
         github: "alfonsusac/react-lava",
         site: "https://react-lava.alfon.dev/",
       },
-      timeFrame: { start: new Date('Dec 20, 2024'), end: new Date('Jan 2, 2025'), }
+      timeFrame: { start: new Date('Dec 20, 2024'), end: new Date('Jan 2, 2025'), },
+      thumbnail: "https://react-lava.alfon.dev/opengraph-image.png",
     }),
     project("app", "Dishook", {
       description: "Discord webhook generator",
@@ -60,7 +70,9 @@ export const data = {
         github: "alfonsusac/dishook",
         site: "https://dishook.alfon.dev/",
       },
-      timeFrame: { start: new Date('Dec 5, 2024'), end: new Date('Dec 18, 2024'), }
+      timeFrame: { start: new Date('Dec 5, 2024'), end: new Date('Dec 18, 2024'), },
+      icon: "https://dishook.alfon.dev/icon.png",
+      thumbnail: undefined,
     }),
     project("app", "advent-of-ui", {
       description: "Advent of UI - 24 days of UI challenges",
@@ -68,7 +80,8 @@ export const data = {
         github: "alfonsusac/advent-of-ui",
         site: "https://advent-of-ui.vercel.app/",
       },
-      timeFrame: { start: new Date('Dec 1, 2024'), end: new Date('Dec 4, 2024'), }
+      timeFrame: { start: new Date('Dec 1, 2024'), end: new Date('Dec 4, 2024'), },
+      thumbnail: "https://advent-of-ui.vercel.app/opengraph-image.png",
     }),
     project("app", "VTuber Logo Collections", {
       description: "A collection of service logos with the VTuber style.",
@@ -76,7 +89,9 @@ export const data = {
         github: "alfonsusac/vtuberlogos",
         site: "https://vtuberlogos.alfon.dev/",
       },
-      timeFrame: { start: new Date('Apr 23, 2024'), end: new Date('May 27, 2024'), }
+      timeFrame: { start: new Date('Apr 23, 2024'), end: new Date('May 27, 2024'), },
+      icon: "https://vtuberlogos.alfon.dev/icon.png",
+      thumbnail: "https://vtuberlogos.alfon.dev/opengraph-image.png",
     }),
     project("tool", "mermaid-ssr", {
       description: "Server side render mermaid diagrams via http (fetch-only)",
@@ -84,7 +99,9 @@ export const data = {
         github: "alfonsusac/mermaid-ssr",
         site: "https://mermaid-ssr.alfon.dev/"
       },
-      timeFrame: { start: new Date('Mar 30, 2024'), end: new Date('May 24, 2024'), }
+      timeFrame: { start: new Date('Mar 30, 2024'), end: new Date('May 24, 2024'), },
+      icon: "https://mermaid-ssr.alfon.dev/icon.png",
+      thumbnail: "https://mermaid-ssr.alfon.dev/opengraph-image.png",
     }),
     project("lib", "nextjs-better-unstable-cache", {
       description: "Next.js cache function wrapper with better logging and options",
@@ -92,7 +109,8 @@ export const data = {
         package: "nextjs-better-unstable-cache",
         github: "alfonsusac/nextjs-better-unstable-cache",
       },
-      timeFrame: { start: new Date('Sep 12, 2023'), end: new Date('Apr 5, 2024'), }
+      timeFrame: { start: new Date('Sep 12, 2023'), end: new Date('Apr 5, 2024'), },
+      thumbnail: undefined
     }),
 
   ],
@@ -118,65 +136,3 @@ export const data = {
 } as const
 
 // Helpers
-
-function project(
-  type: "tool" | "app" | "ui" | "lib" | "edu",
-  name: string,
-  opts: {
-    description: string,
-    url: {
-      package?: string,
-      site?: string,
-      github?: string,
-    },
-    timeFrame?: {
-      start: Date,
-      end?: Date,
-    },
-  }) {
-  return { ...opts, name, type }
-}
-
-function directory(name: string, desc: string) {
-  return { name, description: desc }
-}
-
-function article(title: string, url: string, published_at: Date) {
-  return { title, url, published_at }
-}
-
-function art() {
-
-}
-
-export type Socials = typeof data[ 'socials' ][ number ][ 'type' ]
-
-
-
-
-export async function getPopulatedContent() {
-  const newData = { ...data } as typeof data & {
-    projects: Array<ReturnType<typeof project> & {
-      gh_created_at?: Date
-    }>
-  }
-
-  // Infer get gh_created_at
-  // await Promise.all(
-  //   newData.projects.map(
-  //     async (p, i) => {
-  //       if (p.timeFrame || !p.url.github) return
-  //       const res = await fetch(`https://api.github.com/repos/${ p.url.github }/commits?per_page=1`)
-  //       // const commits = await res.json() as Array<{ commit: { author: { date: string } } }>
-  //       // if (!commits || commits.length === 0) return
-  //       // const lastCommitDate = new Date(commits[ 0 ].commit.author.date)
-  //       newData.projects[ i ] = {
-  //         ...p,
-  //       }
-  //     }
-  //   )
-  // )
-
-
-  return { ...data }
-}

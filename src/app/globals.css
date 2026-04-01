@@ -1,7 +1,8 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-background:  light-dark(#ffffff, #121212);
+  --color-background:  light-dark(#ffffff, #090909);
+  --color-background2: light-dark(#ffffff, #0000);
   --color-foreground:  light-dark(#171717, #ccc);
   --color-foreground2: light-dark(#7a7a7a, #aaaaaa);
   --color-foreground3: light-dark(#222,    #7a7a7a);
@@ -9,6 +10,10 @@
   
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  --font-inter: var(--font-inter);
+  --font-geist-sans: var(--font-geist-sans);
+  --font-geist-mono: var(--font-geist-mono);
 }
 
 body {
