@@ -17,22 +17,32 @@ import {
 } from "react-tweet/api"
 import { cn, IconamoonCommentFill, TablerExternalLink } from "./ui"
 import { Fragment, type ComponentProps, type ReactNode } from "react"
+import { fileCache } from "./static-cache"
 
 
 const REVALIDATE = 60 // 60 seconds
 
 export async function getTweet(id: string) {
-  try {
-    const res = await fetchTweet(id, {
-      next: {
-        revalidate: REVALIDATE
+  const res = await fileCache(
+    `tweet/post-${ id }.json`,
+    async () => {
+      if (process.env.NODE_ENV !== "development")
+        throw new Error("Tweet data not found! Please run the app in development mode to fetch and cache the tweet data.")
+      try {
+        const res = await fetchTweet(id, {
+          next: {
+            revalidate: REVALIDATE
+          }
+        })
+        return { fetchStatus: "ok" as const, data: res }
+      } catch (error) {
+        return { fetchStatus: "error" as const, error }
       }
-    })
-    return res
-  } catch (error) {
-    return { error }
-  }
-
+    }, {
+    serialize: (data) => JSON.stringify(data),
+    deserialize: (data) => JSON.parse(data),
+  })()
+  return res
 }
 
 
@@ -41,17 +51,15 @@ export async function AppTweet(props: {
   id: string,
 }) {
   const res = await getTweet(props.id)
-  if ('error' in res) {
-    return <TweetError error={res.error} />
-  }
-  if (res.notFound || res.data === undefined) {
+  if (res.status === "error")
+    return <TweetError error={res.err} />
+  if (res.data.fetchStatus === "error")
+    return <TweetError error={res.data.error} />
+  if (res.data.data.notFound || res.data.data.data === undefined)
     return <TweetNotFound />
-  }
-  if (res.tombstone) {
+  if (res.data.data.tombstone)
     return <TweetTombstoned />
-  }
-
-  const tweet = enrichTweet(res.data)
+  const tweet = enrichTweet(res.data.data.data)
 
   return (
     <TweetContainer>
@@ -355,7 +363,7 @@ function TweetMediaVideo({ tweet, media }: {
   const mp4Video = getMp4Video(media)
   let timeout = 0
 
-  console.log(mp4Video)
+  // console.log(mp4Video)
 
   return (
     <>

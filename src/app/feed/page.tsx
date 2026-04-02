@@ -1,9 +1,22 @@
 import { feed } from "@/content-feed"
+import { getOrComputeDiskValue, test_1000StaticCache, test_fileCache } from "@/lib/static-cache"
 import { AppTweet } from "@/lib/twitter"
 import { PageHeader, PageInner, PageOuter, SiteHeader } from "@/lib/ui"
+import { readdir } from "fs/promises"
 import { Suspense } from "react"
 
 export default async function FeedPage() {
+
+  // await test_1000StaticCache()
+  // await test_fileCache()
+
+  await getOrComputeDiskValue("mykey", async () => {
+    await new Promise(resolve => setTimeout(resolve, 1000))
+    return JSON.stringify({ hello: "world", time: new Date().toISOString() })
+  })
+
+  // throw new Error("Henlo")
+
   return (
     <PageOuter>
       <SiteHeader />
