@@ -12,108 +12,123 @@ export const data = {
     { url: "https://www.npmjs.com/~alfonsusac", type: "npmjs" },
     { url: "https://npmx.dev/~alfonsusac", type: "npmx" },
   ],
-  projects: [
-    project("app", "diffy", {
-      description: "Compare two text files and see the differences side by side powered by @pierre/diffs",
-      url: {
-        github: "alfonsusac/diffy",
-        site: "https://diffy.alfon.dev/",
-      },
-      timeFrame: { start: new Date('Mar 21, 2026') },
-      icon: "https://diffy.alfon.dev/icon.png",
-      thumbnail: "https://diffy.alfon.dev/opengraph-image.png",
-    }),
-    project("tool", "check-site-meta", {
-      description: "Check site metadata locally via npx before deployment",
-      url: {
-        package: "check-site-meta",
-        github: "alfonsusac/check-site-meta",
-        site: "https://checksitemeta.alfon.dev/",
-      },
-      timeFrame: { start: new Date('Mar 9, 2025'), end: new Date('Jun 7, 2025') },
-      icon: "https://checksitemeta.alfon.dev/icon.png",
-      thumbnail: undefined
-    }),
-    project("ui", "react-flip-children", {
-      description: "FLIP animation for React components",
-      url: {
-        package: "react-flip-children",
-        github: "alfonsusac/react-flip-children",
-        site: "https://react-flip-children.alfon.dev/",
-      },
-      timeFrame: { start: new Date('Dec 21, 2024'), end: new Date('Feb 19, 2025'), },
-      icon: "https://react-flip-children.alfon.dev/icon.png",
-      thumbnail: "https://react-flip-children.alfon.dev/opengraph-image.png",
-    }),
-    project("lib", "advent-event", {
-      description: "Simple TS library to create advent events",
-      url: {
-        package: "advent-event",
-        github: "alfonsusac/advent-event",
-        site: "https://advent-event.alfon.dev/",
-      },
-      timeFrame: { start: new Date('Jan 6, 2025'), end: new Date('Jan 7, 2025'), },
-      thumbnail: undefined,
-    }),
-    project("edu", "react-lava", {
-      description: "Learn React via Animation",
-      url: {
-        github: "alfonsusac/react-lava",
-        site: "https://react-lava.alfon.dev/",
-      },
-      timeFrame: { start: new Date('Dec 20, 2024'), end: new Date('Jan 2, 2025'), },
-      thumbnail: "https://react-lava.alfon.dev/opengraph-image.png",
-    }),
-    project("app", "Dishook", {
-      description: "Discord webhook generator",
-      url: {
-        github: "alfonsusac/discord-webhook",
-        site: "https://dishook.alfon.dev/",
-      },
-      timeFrame: { start: new Date('Dec 5, 2024'), end: new Date('Dec 18, 2024'), },
-      icon: "https://dishook.alfon.dev/icon.png",
-      thumbnail: undefined,
-    }),
-    project("app", "advent-of-ui", {
-      description: "Advent of UI - 24 days of UI challenges",
-      url: {
-        github: "alfonsusac/advent-of-ui",
-        site: "https://advent-of-ui.vercel.app/",
-      },
-      timeFrame: { start: new Date('Dec 1, 2024'), end: new Date('Dec 4, 2024'), },
-      thumbnail: "https://advent-of-ui.vercel.app/opengraph-image.png",
-    }),
-    project("app", "VTuber Logo Collections", {
-      description: "A collection of service logos with the VTuber style.",
-      url: {
-        github: "alfonsusac/service-title-logo",
-        site: "https://vtuberlogos.alfon.dev/",
-      },
-      timeFrame: { start: new Date('Apr 23, 2024'), end: new Date('May 27, 2024'), },
-      icon: "https://vtuberlogos.alfon.dev/icon.png",
-      thumbnail: "https://vtuberlogos.alfon.dev/opengraph-image.png",
-    }),
-    project("tool", "mermaid-ssr", {
-      description: "Server side render mermaid diagrams via http (fetch-only)",
-      url: {
-        github: "alfonsusac/mermaid-ssr",
-        site: "https://mermaid-ssr.alfon.dev/"
-      },
-      timeFrame: { start: new Date('Mar 30, 2024'), end: new Date('May 24, 2024'), },
-      icon: "https://mermaid-ssr.alfon.dev/icon.png",
-      thumbnail: "https://mermaid-ssr.alfon.dev/opengraph-image.png",
-    }),
-    project("lib", "nextjs-better-unstable-cache", {
-      description: "Next.js cache function wrapper with better logging and options",
-      url: {
-        package: "nextjs-better-unstable-cache",
-        github: "alfonsusac/nextjs-better-unstable-cache",
-      },
-      timeFrame: { start: new Date('Sep 12, 2023'), end: new Date('Apr 5, 2024'), },
-      thumbnail: undefined
-    }),
+  projects: {
+    'diffy':
+      project("app", "diffy", {
+        description: "Compare two text files and see the differences side by side powered by @pierre/diffs",
+        url: {
+          github: "alfonsusac/diffy",
+          site: "https://diffy.alfon.dev/",
+        },
+        timeFrame: {
+          start: new Date('Mar 21, 2026')
+        },
+        icon: "https://diffy.alfon.dev/icon.png",
+        thumbnail: "https://diffy.alfon.dev/opengraph-image.png",
+      }),
+    'check-site-meta':
+      project("tool", "check-site-meta", {
+        description: "Check site metadata locally via npx before deployment",
+        url: {
+          package: "check-site-meta",
+          github: "alfonsusac/check-site-meta",
+          site: "https://checksitemeta.alfon.dev/",
+        },
+        timeFrame: { start: new Date('Mar 9, 2025'), end: new Date('Jun 7, 2025') },
+        icon: "https://checksitemeta.alfon.dev/icon.png",
+        thumbnail: undefined
+      }),
+    'react-flip-children':
+      project("ui", "react-flip-children", {
+        description: "FLIP animation for React components",
+        url: {
+          package: "react-flip-children",
+          github: "alfonsusac/react-flip-children",
+          site: "https://react-flip-children.alfon.dev/",
+        },
+        timeFrame: {
+          start: new Date('Dec 21, 2024'), end: new Date('Feb 19, 2025'),
+        },
+        icon: "https://react-flip-children.alfon.dev/icon.png",
+        thumbnail: "https://react-flip-children.alfon.dev/opengraph-image.png",
+      }),
+    'advent-event':
+      project("lib", "advent-event", {
+        description: "Simple TS library to create advent events",
+        url: {
+          package: "advent-event",
+          github: "alfonsusac/advent-event",
+          site: "https://advent-event.alfon.dev/",
+        },
+        timeFrame: { start: new Date('Jan 6, 2025'), end: new Date('Jan 7, 2025'), },
+        thumbnail: undefined,
+      }),
+    'react-lava':
+      project("edu", "react-lava", {
+        description: "Learn React via Animation",
+        url: {
+          github: "alfonsusac/react-lava",
+          site: "https://react-lava.alfon.dev/",
+        },
+        timeFrame: { start: new Date('Dec 20, 2024'), end: new Date('Jan 2, 2025'), },
+        thumbnail: "https://react-lava.alfon.dev/opengraph-image.png",
+      }),
+    'dishook':
+      project("app", "Dishook", {
+        description: "Discord webhook generator",
+        url: {
+          github: "alfonsusac/discord-webhook",
+          site: "https://dishook.alfon.dev/",
+        },
+        timeFrame: { start: new Date('Dec 5, 2024'), end: new Date('Dec 18, 2024'), },
+        icon: "https://dishook.alfon.dev/icon.png",
+        thumbnail: undefined,
+      }),
+    'advent-of-ui':
+      project("app", "advent-of-ui", {
+        description: "Advent of UI - 24 days of UI challenges",
+        url: {
+          github: "alfonsusac/advent-of-ui",
+          site: "https://advent-of-ui.vercel.app/",
+        },
+        timeFrame: { start: new Date('Dec 1, 2024'), end: new Date('Dec 4, 2024'), },
+        thumbnail: "https://advent-of-ui.vercel.app/opengraph-image.png",
+      }),
+    'vtuberlogos':
+      project("app", "VTuber Logo Collections", {
+        description: "A collection of service logos with the VTuber style.",
+        url: {
+          github: "alfonsusac/service-title-logo",
+          site: "https://vtuberlogos.alfon.dev/",
+        },
+        timeFrame: { start: new Date('Apr 23, 2024'), end: new Date('May 27, 2024'), },
+        icon: "https://vtuberlogos.alfon.dev/icon.png",
+        thumbnail: "https://vtuberlogos.alfon.dev/opengraph-image.png",
+      }),
+    'mermaid-ssr':
+      project("tool", "mermaid-ssr", {
+        description: "Server side render mermaid diagrams via http (fetch-only)",
+        url: {
+          github: "alfonsusac/mermaid-ssr",
+          site: "https://mermaid-ssr.alfon.dev/"
+        },
+        timeFrame: { start: new Date('Mar 30, 2024'), end: new Date('May 24, 2024'), },
+        icon: "https://mermaid-ssr.alfon.dev/icon.png",
+        thumbnail: "https://mermaid-ssr.alfon.dev/opengraph-image.png",
+      }),
+    'nextjs-better-unstable-cache':
+      project("lib", "nextjs-better-unstable-cache", {
+        description: "Next.js cache function wrapper with better logging and options",
+        url: {
+          package: "nextjs-better-unstable-cache",
+          github: "alfonsusac/nextjs-better-unstable-cache",
+        },
+        timeFrame: { start: new Date('Sep 12, 2023'), end: new Date('Apr 5, 2024'), },
+        thumbnail: undefined
+      }),
+  },
 
-  ],
+
   directories: [
     directory("advent-event", "Simple TS library to create advent events."),
     directory("advent-of-ui", "24 days of UI challenges"),

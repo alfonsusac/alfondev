@@ -7,7 +7,7 @@ export default async function ProjectPage(props: {
 }) {
   const { project_id } = await props.params
 
-  const project = data.projects.find(p => p.name.replaceAll(' ', '-') === project_id)
+  const project = Object.entries(data.projects).find(([ k, p ]) => k === project_id)?.[ 1 ]
   if (!project) return (
     <PageOuter>
       <SiteHeader />

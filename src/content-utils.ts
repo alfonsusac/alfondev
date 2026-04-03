@@ -36,7 +36,7 @@ export function art() {
 }
 
 export type Socials = typeof data[ 'socials' ][ number ][ 'type' ]
-export type Projects = typeof data[ 'projects' ][ number ][ 'name' ]
+export type Projects = keyof typeof data[ 'projects' ]
 
 export function feedpost(
   platform: "twitter" | "bsky",

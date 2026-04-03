@@ -18,6 +18,8 @@ import {
 import { cn, IconamoonCommentFill, TablerExternalLink } from "./ui"
 import { Fragment, type ComponentProps, type ReactNode } from "react"
 import { fileCache } from "./static-cache"
+import { FeedInfo } from "./ui-feed"
+import type { Projects } from "@/content-utils"
 
 
 const REVALIDATE = 60 // 60 seconds
@@ -49,6 +51,7 @@ export async function getTweet(id: string) {
 
 export async function AppTweet(props: {
   id: string,
+  project?: Projects
 }) {
   const res = await getTweet(props.id)
   if (res.status === "error")
@@ -62,15 +65,27 @@ export async function AppTweet(props: {
   const tweet = enrichTweet(res.data.data.data)
 
   return (
-    <TweetContainer>
-      <TweetInfo tweet={tweet} />
-      {/* <TweetHeader tweet={tweet} /> */}
+    <article className="flex flex-col gap-3">
       {tweet.in_reply_to_status_id_str && <TweetInReplyTo tweet={tweet} />}
-      <TweetBody tweet={tweet} />
       {tweet.mediaDetails?.length ? (
         <TweetMedia tweet={tweet} />
       ) : null}
+      <FeedInfo date={tweet.created_at} platform="X" projectid={props.project} />
+      <TweetBody tweet={tweet} />
+      <TweetActions tweet={tweet} />
+    </article>
+  )
+
+  return (
+    <TweetContainer>
+      {/* <TweetHeader tweet={tweet} /> */}
       {/* {tweet.quoted_tweet && <QuotedTweet tweet={tweet.quoted_tweet} />} */}
+      {tweet.in_reply_to_status_id_str && <TweetInReplyTo tweet={tweet} />}
+      {tweet.mediaDetails?.length ? (
+        <TweetMedia tweet={tweet} />
+      ) : null}
+      <TweetInfo tweet={tweet} />
+      <TweetBody tweet={tweet} />
       <TweetActions tweet={tweet} />
     </TweetContainer>
   )
@@ -144,7 +159,6 @@ function TweetContainer(props: { children: React.ReactNode, className?: string }
   )}>
     <article className={cn(
       "relative [box-sizing:inherit]",
-      // " py-3 px-4",
     )}>{props.children}</article>
   </div>
 }
@@ -254,7 +268,7 @@ function TweetInReplyTo(props: { tweet: EnrichedTweet }) {
 
 function TweetBody(props: { tweet: EnrichedTweet }) {
   return <p className={cn(
-    "my-3 mb-5 leading-snug",
+    "leading-snug",
     "s.root",
     "wrap-break-word",
     "whitespace-pre-wrap",
@@ -292,12 +306,11 @@ function TweetMedia(props: {
 
   return (
     <div className={cn(
-      "overflow-hidden relative mt-3",
+      "overflow-hidden relative mt-3 bg-foreground/5",
       !props.quoted && "rounded-xl border-(--tweet-border)",
     )}>
       <div
         className={cn(
-          // "s.mediaWrapper",
           "grid grid-rows-[1fr]",
           "gap-1 h-full w-full",
           length > 1 && "grid-cols-[repeat(2,_1fr)]",
@@ -368,6 +381,7 @@ function TweetMediaVideo({ tweet, media }: {
   return (
     <>
       <video
+        className="w-full h-full"
         controls={true}
         // className={mediaStyles.image}
         poster={getMediaUrl(media, 'small')}
@@ -491,7 +505,7 @@ function TweetActions(props: { tweet: EnrichedTweet }) {
         "flex items-center justify-end",
         "text-foreground4",
         // "text-(--tweet-font-color-secondary)",
-        "pt-1 border-t-(--tweet-border)",
+        "border-t-(--tweet-border)",
         "wrap-break-word",
         "whitespace-nowrap",
         "text-ellipsis",

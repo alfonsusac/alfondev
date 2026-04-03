@@ -40,9 +40,8 @@ async function FeedList() {
     {feed.map((post, i) => {
       if (post.platform === "twitter") {
         const id = post.url.split("/").slice(-1)[0]
-        return <AppTweet key={i} id={id} />
+        return <AppTweet key={i} id={id} project={post.project} />
       }
     })}
-    {/* <AppTweet id="1866873433776328792" /> */}
   </>)
 }

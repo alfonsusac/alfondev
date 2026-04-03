@@ -102,8 +102,8 @@ function ProjectSection() {
       </SectionDesc>
     </SectionHeader>
     <ListBlock>
-      {data.projects
-        .toSorted((a, b) => {
+      {Object.entries(data.projects)
+        .toSorted(([_, a], [__, b]) => {
           if (!a.timeFrame && !b.timeFrame) return 0
           if (!a.timeFrame) return 1
           if (!b.timeFrame) return -1
@@ -111,9 +111,9 @@ function ProjectSection() {
           const dateB = b.timeFrame.end ?? b.timeFrame.start
           return dateB.getTime() - dateA.getTime()
         })
-        .map((p, i) => {
+        .map(([key, p], i) => {
           return (
-            <Link href={`/project/${ p.name.replaceAll(' ', '-') }`}  key={i} className="flex flex-col group relative hover:brightness-125">
+            <Link href={`/project/${ key }`}  key={i} className="flex flex-col group relative hover:brightness-125">
               <div className="text-foreground2 items-baseline lowercase flex flex-col gap-x-2 sm:flex-row leading-snug">
                 <div className="hover:brightness-125 leading-tight flex gap-2">
                   {p.name}
