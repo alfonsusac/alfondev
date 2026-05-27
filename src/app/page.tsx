@@ -1,6 +1,6 @@
 import { data } from "@/content"
 import { date, range } from "@/lib/date"
-import { cn, PageHeader, PageInner, PageOuter } from "@/lib/ui"
+import { cn, PageFooter, PageHeader, PageInner, PageOuter, SiteHeader } from "@/lib/ui"
 import Link from "next/link"
 import Script from "next/script"
 import type { ComponentProps } from "react"
@@ -9,6 +9,7 @@ export default function Home() {
 
   return (
     <PageOuter>
+      <SiteHeader isHome />
       <PageInner>
 
         <PageHeader className="pt-28">
@@ -22,24 +23,20 @@ export default function Home() {
                 return (
                   <InlineExternalLink href={a.url} key={i}>
                     {a.type}
+
                   </InlineExternalLink>
                 )
               })}
           </ExternalLinkRow>
         </PageHeader>
 
+
         <ProjectSection />
         <DirectoriesSection />
         <ArticlesSection />
         <RandomDemos />
 
-        <footer>
-          <div className="pt-20 text-center text-foreground2 pb-20">
-            <div className="text-sm">
-              © {new Date().getFullYear()} alfon
-            </div>
-          </div>
-        </footer>
+        <PageFooter />
       </PageInner>
       {process.env.NODE_ENV === 'production' && (
         <Script id="analytics" crossOrigin="anonymous" defer
@@ -103,7 +100,7 @@ function ProjectSection() {
     </SectionHeader>
     <ListBlock>
       {Object.entries(data.projects)
-        .toSorted(([_, a], [__, b]) => {
+        .toSorted(([ _, a ], [ __, b ]) => {
           if (!a.timeFrame && !b.timeFrame) return 0
           if (!a.timeFrame) return 1
           if (!b.timeFrame) return -1
@@ -111,9 +108,9 @@ function ProjectSection() {
           const dateB = b.timeFrame.end ?? b.timeFrame.start
           return dateB.getTime() - dateA.getTime()
         })
-        .map(([key, p], i) => {
+        .map(([ key, p ], i) => {
           return (
-            <Link href={`/project/${ key }`}  key={i} className="flex flex-col group relative hover:brightness-125">
+            <Link href={`/project/${ key }`} key={i} className="flex flex-col group relative hover:brightness-125">
               <div className="text-foreground2 items-baseline lowercase flex flex-col gap-x-2 sm:flex-row leading-snug">
                 <div className="hover:brightness-125 leading-tight flex gap-2">
                   {p.name}

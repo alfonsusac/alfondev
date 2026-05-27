@@ -2,6 +2,7 @@ import { clsx, type ClassValue } from "clsx"
 import Link from "next/link"
 import type { ComponentProps, SVGProps } from "react"
 import { twMerge } from "tailwind-merge"
+import { SiteHeaderNavButtonClient } from "./ui.client"
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -31,6 +32,16 @@ export function PageInner(props: ComponentProps<"div">) {
 export function PageHeader(props: ComponentProps<"header">) {
   return (<header {...props} className={cn("pt-12 flex flex-col items-start", props.className)} />)
 }
+export function PageFooter(props: ComponentProps<"footer">) {
+  return <footer {...props}>
+    <div className="pt-20 text-center text-foreground2 pb-20">
+      <div className="text-sm">
+        © {new Date().getFullYear()} alfon
+      </div>
+    </div>
+  </footer>
+}
+
 
 export function LinkButton(props: ComponentProps<typeof Link> & {
 
@@ -48,15 +59,31 @@ export function LinkButton(props: ComponentProps<typeof Link> & {
   )
 }
 
-export function SiteHeader() {
-  return (<header className="h-18 self-stretch -mx-10 px-10 flex items-center justify-center">
+export function SiteHeader(props: {
+  isHome?: boolean,
+  className?: string
+}) {
+  return (<header className={cn("h-18 self-stretch -mx-10 px-10 flex items-center justify-center", props.className)}>
     <div className="w-full max-w-3xl flex items-center justify-between">
       <div className="flex gap-8 items-baseline">
-        <div className="text-2xl tracking-tight">alfon</div>
-        <div className="flex gap-2">
-          <LinkButton href="/" className="text-sm text-foreground3 hover:brightness-125">home</LinkButton>
+        {!props.isHome && <div className="text-2xl tracking-tight">alfon</div>}
+        <div className="flex gap-6">
+          <NavButton href="/">home</NavButton>
+          <NavButton href="/feed">feeds</NavButton>
         </div>
       </div>
     </div>
   </header>)
 }
+
+function NavButton(props: ComponentProps<typeof Link>) {
+  return (
+    <SiteHeaderNavButtonClient {...props} className={cn(
+      "text-sm text-foreground3 hover:brightness-125",
+      "data-active:text-foreground2",
+      props.className
+    )} />
+  )
+}
+
+

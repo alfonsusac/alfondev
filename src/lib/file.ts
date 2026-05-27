@@ -1,14 +1,13 @@
 import type { Abortable } from "events"
-import type { Mode, ObjectEncodingOptions, OpenMode } from "fs"
+import type { Mode, OpenMode } from "fs"
 import { mkdir, readFile, rename, rm, writeFile } from "fs/promises"
-import { getErrorCode, getErrorMessage } from "./error"
+import { getErrorMessage } from "./error"
 import lockfile from 'proper-lockfile'
 import { dirname } from "path"
 
 
 
 /**
- * 
  * @param path Path relative to process.cwd()
  */
 export async function read(path: string, encoding: BufferEncoding = "utf-8", opts?: {
@@ -27,7 +26,7 @@ export async function read(path: string, encoding: BufferEncoding = "utf-8", opt
   }
 }
 
-export async function write(path: string, data: string, encoding: BufferEncoding = "utf-8", opts?: {
+export async function write(path: string, data: string | Buffer, encoding: BufferEncoding = "utf-8", opts?: {
   mode?: Mode | undefined
   flag?: OpenMode | undefined
   flush?: boolean | undefined
@@ -43,15 +42,29 @@ export async function write(path: string, data: string, encoding: BufferEncoding
   }
 }
 
+const allowedDeletePaths = [
+  "./src/data/cache/",
+  "./public/",
+]
+
 export async function deleteFile(path: string) {
   if (path.includes('..')) throw new Error("Path traversal is not allowed")
-  if (!path.startsWith("./src/data/cache/")) throw new Error("Only files in ./src/data/cache/ can be deleted")
+  if (!allowedDeletePaths.some(allowedPath => path.startsWith(allowedPath))) {
+    throw new Error(`Only files in ${ allowedDeletePaths.join(" | ") } can be deleted`)
+  }
   try {
     await rm(path, { force: true })
     return { status: "ok" as const }
   } catch (error) {
     return { status: "error" as const, error }
   }
+}
+
+export async function fileExists(path: string) {
+  const res = await read(path)
+  if (res.status === "ok") return { status: "exists" as const }
+  if (res.status === "enoent") return { status: "not_found" as const }
+  return { status: "error" as const, error: res.error }
 }
 
 

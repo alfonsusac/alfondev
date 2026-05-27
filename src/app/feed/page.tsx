@@ -1,7 +1,8 @@
 import { feed } from "@/content-feed"
+import { test_resolveImageProps } from "@/lib/c-image"
 import { getOrComputeDiskValue, test_1000StaticCache, test_fileCache } from "@/lib/static-cache"
 import { AppTweet } from "@/lib/twitter"
-import { PageHeader, PageInner, PageOuter, SiteHeader } from "@/lib/ui"
+import { PageFooter, PageHeader, PageInner, PageOuter, SiteHeader } from "@/lib/ui"
 import { readdir } from "fs/promises"
 import { Suspense } from "react"
 
@@ -9,6 +10,7 @@ export default async function FeedPage() {
 
   // await test_1000StaticCache()
   // await test_fileCache()
+  await test_resolveImageProps()
 
   await getOrComputeDiskValue("mykey", async () => {
     await new Promise(resolve => setTimeout(resolve, 1000))
@@ -30,6 +32,7 @@ export default async function FeedPage() {
             <FeedList />
           </Suspense>
         </section>
+        <PageFooter />
       </PageInner>
     </PageOuter>
   )

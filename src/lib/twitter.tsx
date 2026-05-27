@@ -16,10 +16,11 @@ import {
   type TweetUser,
 } from "react-tweet/api"
 import { cn, IconamoonCommentFill, TablerExternalLink } from "./ui"
-import { Fragment, type ComponentProps, type ReactNode } from "react"
+import { Fragment, Suspense, type ComponentProps, type ReactNode } from "react"
 import { fileCache } from "./static-cache"
 import { FeedInfo } from "./ui-feed"
 import type { Projects } from "@/content-utils"
+import { StaticImage, StaticVideoSource } from "./c-image"
 
 
 const REVALIDATE = 60 // 60 seconds
@@ -38,6 +39,7 @@ export async function getTweet(id: string) {
         })
         return { fetchStatus: "ok" as const, data: res }
       } catch (error) {
+        console.log(`Error fetching tweet with id ${ id }:`, error)
         return { fetchStatus: "error" as const, error }
       }
     }, {
@@ -67,9 +69,7 @@ export async function AppTweet(props: {
   return (
     <article className="flex flex-col gap-3">
       {tweet.in_reply_to_status_id_str && <TweetInReplyTo tweet={tweet} />}
-      {tweet.mediaDetails?.length ? (
-        <TweetMedia tweet={tweet} />
-      ) : null}
+      {tweet.mediaDetails?.length ? <TweetMedia tweet={tweet} /> : null}
       <FeedInfo date={tweet.created_at} platform="X" projectid={props.project} />
       <TweetBody tweet={tweet} />
       <TweetActions tweet={tweet} />
@@ -318,7 +318,7 @@ function TweetMedia(props: {
           length > 4 && "grid-cols-[repeat(2,_1fr)]"
         )}
       >
-        {props.tweet.mediaDetails?.map((media) => (
+        {props.tweet.mediaDetails?.map((media, i) => (
           <Fragment key={media.media_url_https}>
             {media.type === 'photo' ? (
               <a
@@ -336,7 +336,8 @@ function TweetMedia(props: {
                   )}
                   style={getSkeletonStyle(media, length)}
                 />
-                <img
+                <StaticImage
+                  cacheKey={`tweet/post-${ props.tweet.id_str }-media-${ media.media_url_https.split('/').slice(-1)[ 0 ] }`}
                   src={getMediaUrl(media, 'small')}
                   alt={media.ext_alt_text || 'Image'}
                   className={cn(
@@ -375,8 +376,8 @@ function TweetMediaVideo({ tweet, media }: {
   // const [ ended, setEnded ] = useState(false)
   const mp4Video = getMp4Video(media)
   let timeout = 0
-
-  // console.log(mp4Video)
+  
+  const mp4VideoUrl = mp4Video.url.replace('?tag=12', '')
 
   return (
     <>
@@ -407,8 +408,13 @@ function TweetMediaVideo({ tweet, media }: {
       //   setEnded(true)
       // }}
       >
-        <source src={mp4Video.url.replace('?tag=12', '')} type={mp4Video.content_type} />
+        <StaticVideoSource
+          cacheKey={`tweet/post-${ tweet.id_str }-media-${ mp4VideoUrl.split('/').slice(-1)[ 0 ] }`}
+          src={mp4VideoUrl}
+          type={mp4Video.content_type}
+        />
       </video>
+
 
       {/* {playButton && (
         <button
