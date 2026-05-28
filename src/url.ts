@@ -1,0 +1,1 @@
+export const canonicalUrl = "https://alfon.dev"

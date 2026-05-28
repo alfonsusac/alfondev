@@ -24,3 +24,70 @@ model Thing {
 
   @@unique([project, event, location, referer])
 }
+
+
+
+
+
+model RawEvents {
+  id BigInt @id @default(autoincrement())
+  project_id String
+  event_name String
+  event_payload Json
+  schema_version Int @default(1)
+  env String
+  timestamp  DateTime @default(now())
+}
+
+model ProjectCountry {
+  id Int @id @default(autoincrement())
+  project_id String
+  country_code String
+  count Int
+
+  updatedAt  DateTime @updatedAt
+  createdAt  DateTime @default(now())
+}
+
+model ProjectHour {
+  id Int @id @default(autoincrement())
+  project_id String
+  hour DateTime
+  count Int
+
+  updatedAt  DateTime @updatedAt
+  createdAt  DateTime @default(now())
+}
+
+model ProjectDayReferer {
+  id Int @id @default(autoincrement())
+  project_id String
+  day DateTime
+  referer String
+  count Int
+
+  updatedAt  DateTime @updatedAt
+  createdAt  DateTime @default(now())
+}
+
+model ProjectEvent {
+  id Int @id @default(autoincrement())
+  project_id String
+  event_name String
+  count Int
+
+  updatedAt  DateTime @updatedAt
+  createdAt  DateTime @default(now())
+}
+
+model MonthlyDistribution {
+  id Int @id @default(autoincrement())
+  project_id String
+  month DateTime
+  dimension String
+  dimension_value String
+  count Int
+
+  updatedAt  DateTime @updatedAt
+  createdAt  DateTime @default(now())
+}

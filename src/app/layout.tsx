@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import { Geist, Geist_Mono, Inter } from "next/font/google"
+import { Geist, Geist_Mono, Inter, Kode_Mono } from "next/font/google"
 import "./globals.css"
 
 const geistSans = Geist({
@@ -14,6 +14,11 @@ const inter = Inter({
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
+  subsets: [ "latin" ],
+})
+
+const kodeMono = Kode_Mono({
+  variable: "--font-kode-mono",
   subsets: [ "latin" ],
 })
 
@@ -35,7 +40,7 @@ export default function RootLayout({
         {/* <script id="umami-script" defer src="https://analytics.arinji.com/script.js" data-website-id="d22e04da-dabc-40da-9ced-ddc457aa3ab9"></script> */}
       </head>
       <body
-        className={`${ geistSans.variable } ${ geistMono.variable } ${ inter.variable } antialiased`}
+        className={`${ geistSans.variable } ${ geistMono.variable } ${ inter.variable } ${ kodeMono.variable } antialiased`}
       >
         {children}
       </body>

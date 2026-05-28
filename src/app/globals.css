@@ -14,6 +14,7 @@
   --font-inter: var(--font-inter);
   --font-geist-sans: var(--font-geist-sans);
   --font-geist-mono: var(--font-geist-mono);
+  --font-kode-mono: var(--font-kode-mono);
 }
 
 body {
